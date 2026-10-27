@@ -212,3 +212,180 @@ OBS:
 Este projeto foi desenvolvido com finalidade educacional, demonstrando a comunicação entre um frontend em HTML/JavaScript e um backend em Python utilizando Flask.
 Para sistemas que exigem alto nível de segurança, recomenda-se utilizar métodos de geração de números aleatórios apropriados para fins criptográficos.
 👨‍💻
+
+-------------------------------------------------------------------------------------------------------------------------------------------
+# Gerador de Senhas em Python
+
+Aplicação web desenvolvida com Python, Flask, HTML, CSS e JavaScript para gerar senhas aleatórias personalizadas de acordo com as preferências do usuário.
+
+O projeto utiliza uma API para integrar o frontend ao backend, permitindo configurar o tamanho da senha e os tipos de caracteres utilizados na geração.
+
+## Tecnologias utilizadas
+
+- **Python** — implementação da lógica de geração de senhas.
+- **Flask** — criação do servidor e da API.
+- **Flask-CORS** — gerenciamento do compartilhamento de recursos entre origens.
+- **HTML5** — estrutura da interface.
+- **CSS3** — estilização e organização visual.
+- **JavaScript** — interatividade e comunicação com a API.
+- **JSON** — formato de comunicação entre frontend e backend.
+
+## Funcionalidades
+
+- Geração de senhas aleatórias.
+- Definição do tamanho da senha.
+- Seleção de letras, números e símbolos.
+- Validação das opções selecionadas.
+- Comunicação entre frontend e backend por meio de requisições HTTP.
+- Exibição da senha gerada na interface.
+
+## Requisitos
+
+Para executar o projeto, é necessário ter:
+
+- Python 3 instalado.
+- Um navegador atualizado.
+- Visual Studio Code ou outro editor de código (opcional, recomendado para desenvolvimento).
+
+## Instalação e execução
+
+### 1. Clonar o repositório
+
+No terminal, execute:
+
+```bash
+git clone https://github.com/EdeNet00/GeradorDeSenhasEmPython.git
+```
+
+Entre na pasta do projeto:
+
+```bash
+cd GeradorDeSenhasEmPython
+```
+
+### 2. Instalar as dependências
+
+Execute o seguinte comando para instalar as bibliotecas necessárias:
+
+```bash
+python -m pip install flask flask-cors
+```
+
+No Windows, caso o comando `python` não funcione, tente utilizar `py`:
+
+```powershell
+py -m pip install flask flask-cors
+```
+
+### 3. Iniciar o servidor
+
+Execute o arquivo responsável pelo backend:
+
+```bash
+python senhas.py
+```
+
+O servidor Flask deverá iniciar no endereço local configurado pela aplicação, normalmente:
+
+```text
+http://127.0.0.1:5000
+```
+
+Mantenha o terminal aberto enquanto utilizar o sistema.
+
+### 4. Abrir a aplicação
+
+Abra o arquivo `index.html` no navegador.
+
+A interface utiliza JavaScript para enviar as configurações ao backend. Portanto, o servidor Flask precisa estar em execução para que a geração de senhas funcione.
+
+## Funcionamento da aplicação
+
+O processo de geração de senhas ocorre nas seguintes etapas:
+
+1. O usuário acessa a interface web.
+2. Define o tamanho desejado para a senha.
+3. Seleciona os tipos de caracteres que deseja utilizar.
+4. O JavaScript envia as configurações ao backend por meio de uma requisição HTTP.
+5. O servidor Flask processa as informações recebidas.
+6. O Python gera a senha com base nas opções selecionadas.
+7. A API retorna o resultado em formato JSON.
+8. O frontend apresenta a senha gerada ao usuário.
+
+## API
+
+O backend disponibiliza um endpoint para realizar a geração das senhas.
+
+### Gerar senha
+
+- **Método HTTP:** `POST`
+- **Endpoint:** `/gerar`
+- **Endereço local:** `http://127.0.0.1:5000/gerar`
+
+### Exemplo de requisição
+
+A API recebe as configurações em formato JSON:
+
+```json
+{
+  "tamanho": 12,
+  "letras": true,
+  "numeros": true,
+  "simbolos": true
+}
+```
+
+Os campos representam:
+
+| Campo | Descrição |
+|---|---|
+| `tamanho` | Quantidade de caracteres da senha |
+| `letras` | Define se letras serão utilizadas |
+| `numeros` | Define se números serão utilizados |
+| `simbolos` | Define se símbolos serão utilizados |
+
+### Exemplo de resposta
+
+Em caso de sucesso, a API retorna a senha gerada:
+
+```json
+{
+  "senha": "aB8@xP2#Lm91"
+}
+```
+
+O valor apresentado é apenas ilustrativo.
+
+Caso nenhuma categoria de caracteres seja selecionada, a API pode retornar uma mensagem de erro, conforme a validação implementada no backend.
+
+## Estrutura do projeto
+
+```text
+GeradorDeSenhasEmPython/
+├── index.html
+├── script.js
+├── senhas.py
+├── .gitignore
+└── README.md
+```
+
+### Descrição dos arquivos
+
+- `index.html`: estrutura da interface web.
+- `script.js`: lógica do frontend e comunicação com a API.
+- `senhas.py`: servidor Flask e lógica de geração das senhas.
+- `.gitignore`: arquivos e diretórios ignorados pelo Git.
+- `README.md`: documentação do projeto.
+
+## Segurança
+
+O projeto possui finalidade educacional e demonstra conceitos de desenvolvimento web e integração entre frontend e backend.
+
+A implementação utiliza o módulo `random` para a seleção dos caracteres. Para aplicações que exigem senhas criptograficamente seguras, recomenda-se utilizar o módulo `secrets` do Python, apropriado para a geração de valores destinados a finalidades de segurança.
+
+## Objetivo acadêmico
+
+O projeto tem como objetivo praticar lógica de programação em Python, desenvolvimento de interfaces web, criação de APIs com Flask e comunicação entre diferentes componentes de uma aplicação.
+
+
+
