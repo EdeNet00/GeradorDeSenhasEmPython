@@ -213,31 +213,34 @@ Este projeto foi desenvolvido com finalidade educacional, demonstrando a comunic
 Para sistemas que exigem alto nível de segurança, recomenda-se utilizar métodos de geração de números aleatórios apropriados para fins criptográficos.
 👨‍💻
 
--------------------------------------------------------------------------------------------------------------------------------------------
+A-------------------------------------------------------------------------------------------------------------------------------------------A
+
 # Gerador de Senhas em Python
 
 Aplicação web desenvolvida com Python, Flask, HTML, CSS e JavaScript para gerar senhas aleatórias personalizadas de acordo com as preferências do usuário.
 
-O projeto utiliza uma API para integrar o frontend ao backend, permitindo configurar o tamanho da senha e os tipos de caracteres utilizados na geração.
+O projeto permite definir o tamanho da senha e selecionar os tipos de caracteres utilizados na geração, integrando uma interface web a um backend em Python por meio de uma API REST.
 
 ## Tecnologias utilizadas
 
-- **Python** — implementação da lógica de geração de senhas.
-- **Flask** — criação do servidor e da API.
-- **Flask-CORS** — gerenciamento do compartilhamento de recursos entre origens.
-- **HTML5** — estrutura da interface.
-- **CSS3** — estilização e organização visual.
-- **JavaScript** — interatividade e comunicação com a API.
-- **JSON** — formato de comunicação entre frontend e backend.
+- **Python 3:** lógica de geração das senhas.
+- **Flask:** criação do servidor e da API.
+- **Flask-CORS:** suporte à comunicação entre diferentes origens.
+- **HTML5:** estrutura da interface.
+- **CSS3:** estilização e organização visual.
+- **JavaScript:** interatividade e comunicação com o backend.
+- **Random:** seleção aleatória de caracteres.
 
 ## Funcionalidades
 
-- Geração de senhas aleatórias.
 - Definição do tamanho da senha.
-- Seleção de letras, números e símbolos.
-- Validação das opções selecionadas.
-- Comunicação entre frontend e backend por meio de requisições HTTP.
-- Exibição da senha gerada na interface.
+- Utilização de letras maiúsculas e minúsculas.
+- Inclusão de números.
+- Inclusão de símbolos.
+- Geração de senhas conforme as opções selecionadas.
+- Validação para impedir a geração sem selecionar uma categoria de caracteres.
+- Comunicação entre frontend e backend por meio de uma API REST.
+- Exibição da senha gerada diretamente na interface.
 
 ## Requisitos
 
@@ -245,13 +248,13 @@ Para executar o projeto, é necessário ter:
 
 - Python 3 instalado.
 - Um navegador atualizado.
-- Visual Studio Code ou outro editor de código (opcional, recomendado para desenvolvimento).
+- Visual Studio Code ou outro editor de código (recomendado).
 
 ## Instalação e execução
 
 ### 1. Clonar o repositório
 
-No terminal, execute:
+Abra o terminal e execute:
 
 ```bash
 git clone https://github.com/EdeNet00/GeradorDeSenhasEmPython.git
@@ -265,13 +268,13 @@ cd GeradorDeSenhasEmPython
 
 ### 2. Instalar as dependências
 
-Execute o seguinte comando para instalar as bibliotecas necessárias:
+Instale o Flask e o Flask-CORS com o seguinte comando:
 
 ```bash
 python -m pip install flask flask-cors
 ```
 
-No Windows, caso o comando `python` não funcione, tente utilizar `py`:
+No Windows, caso o comando `python` não funcione, tente:
 
 ```powershell
 py -m pip install flask flask-cors
@@ -285,46 +288,48 @@ Execute o arquivo responsável pelo backend:
 python senhas.py
 ```
 
-O servidor Flask deverá iniciar no endereço local configurado pela aplicação, normalmente:
+Se a inicialização ocorrer corretamente, o servidor ficará disponível no endereço:
 
-```text
 http://127.0.0.1:5000
-```
 
-Mantenha o terminal aberto enquanto utilizar o sistema.
+Mantenha o terminal aberto enquanto utilizar a aplicação.
 
-### 4. Abrir a aplicação
+### 4. Abrir a interface
 
 Abra o arquivo `index.html` no navegador.
 
-A interface utiliza JavaScript para enviar as configurações ao backend. Portanto, o servidor Flask precisa estar em execução para que a geração de senhas funcione.
+O JavaScript fará a comunicação com o servidor Flask para enviar as configurações e receber a senha gerada. Por isso, o backend precisa estar em execução para que a funcionalidade principal opere corretamente.
 
 ## Funcionamento da aplicação
 
-O processo de geração de senhas ocorre nas seguintes etapas:
+O funcionamento ocorre nas seguintes etapas:
 
 1. O usuário acessa a interface web.
 2. Define o tamanho desejado para a senha.
-3. Seleciona os tipos de caracteres que deseja utilizar.
-4. O JavaScript envia as configurações ao backend por meio de uma requisição HTTP.
-5. O servidor Flask processa as informações recebidas.
-6. O Python gera a senha com base nas opções selecionadas.
+3. Seleciona se deseja utilizar letras, números e símbolos.
+4. O arquivo `script.js` coleta as opções selecionadas.
+5. O JavaScript envia uma requisição HTTP `POST` para a API Flask.
+6. O backend processa as configurações e gera a senha.
 7. A API retorna o resultado em formato JSON.
-8. O frontend apresenta a senha gerada ao usuário.
+8. A interface recebe a resposta e exibe a senha gerada.
 
 ## API
 
-O backend disponibiliza um endpoint para realizar a geração das senhas.
+O backend disponibiliza um endpoint para a geração de senhas.
 
 ### Gerar senha
 
-- **Método HTTP:** `POST`
-- **Endpoint:** `/gerar`
-- **Endereço local:** `http://127.0.0.1:5000/gerar`
+| Propriedade | Valor |
+|---|---|
+| Método HTTP | `POST` |
+| Endpoint | `/gerar` |
+| Endereço local | `http://127.0.0.1:5000/gerar` |
+| Formato de entrada | JSON |
+| Formato de resposta | JSON |
 
 ### Exemplo de requisição
 
-A API recebe as configurações em formato JSON:
+O frontend envia as configurações selecionadas pelo usuário:
 
 ```json
 {
@@ -335,18 +340,16 @@ A API recebe as configurações em formato JSON:
 }
 ```
 
-Os campos representam:
-
 | Campo | Descrição |
 |---|---|
-| `tamanho` | Quantidade de caracteres da senha |
+| `tamanho` | Quantidade de caracteres desejada |
 | `letras` | Define se letras serão utilizadas |
 | `numeros` | Define se números serão utilizados |
 | `simbolos` | Define se símbolos serão utilizados |
 
-### Exemplo de resposta
+### Resposta de sucesso
 
-Em caso de sucesso, a API retorna a senha gerada:
+Quando a senha é gerada, a API retorna um objeto JSON:
 
 ```json
 {
@@ -354,9 +357,19 @@ Em caso de sucesso, a API retorna a senha gerada:
 }
 ```
 
-O valor apresentado é apenas ilustrativo.
+O valor apresentado é apenas um exemplo ilustrativo.
 
-Caso nenhuma categoria de caracteres seja selecionada, a API pode retornar uma mensagem de erro, conforme a validação implementada no backend.
+### Resposta de erro
+
+Caso nenhuma categoria de caracteres seja selecionada, a API retorna uma mensagem de erro:
+
+```json
+{
+  "erro": "Escolha pelo menos uma opção."
+}
+```
+
+Nesse caso, a resposta utiliza o status HTTP `400 Bad Request`.
 
 ## Estrutura do projeto
 
@@ -371,21 +384,36 @@ GeradorDeSenhasEmPython/
 
 ### Descrição dos arquivos
 
-- `index.html`: estrutura da interface web.
-- `script.js`: lógica do frontend e comunicação com a API.
-- `senhas.py`: servidor Flask e lógica de geração das senhas.
-- `.gitignore`: arquivos e diretórios ignorados pelo Git.
-- `README.md`: documentação do projeto.
+- **`index.html`:** contém a estrutura da interface, os campos de configuração e a área de exibição da senha.
+- **`script.js`:** controla as interações da página, envia as configurações para a API e apresenta o resultado.
+- **`senhas.py`:** implementa o backend em Python, o servidor Flask e a lógica de geração das senhas.
+- **`.gitignore`:** define os arquivos e diretórios que devem ser ignorados pelo Git.
+- **`README.md`:** documenta o projeto, suas dependências e instruções de execução.
+
+## Interface
+
+A aplicação apresenta uma interface centralizada, com elementos voltados à configuração e à geração de senhas.
+
+Entre os componentes estão:
+
+- Campo para definir o tamanho da senha.
+- Opções para selecionar letras, números e símbolos.
+- Botão para iniciar a geração.
+- Área para exibir a senha resultante.
+- Mensagens para indicar erros ou problemas durante a operação.
 
 ## Segurança
 
-O projeto possui finalidade educacional e demonstra conceitos de desenvolvimento web e integração entre frontend e backend.
+Este projeto possui finalidade educacional e demonstra conceitos de programação em Python, desenvolvimento web e integração entre frontend e backend.
 
-A implementação utiliza o módulo `random` para a seleção dos caracteres. Para aplicações que exigem senhas criptograficamente seguras, recomenda-se utilizar o módulo `secrets` do Python, apropriado para a geração de valores destinados a finalidades de segurança.
+A implementação utiliza o módulo `random` para selecionar os caracteres. Esse módulo não é recomendado para a geração de senhas que exigem segurança criptográfica. Para aplicações que lidam com credenciais reais, recomenda-se utilizar o módulo `secrets` do Python.
 
 ## Objetivo acadêmico
 
-O projeto tem como objetivo praticar lógica de programação em Python, desenvolvimento de interfaces web, criação de APIs com Flask e comunicação entre diferentes componentes de uma aplicação.
+O projeto tem como objetivo praticar lógica de programação em Python, desenvolvimento de interfaces web, criação de APIs com Flask, manipulação de dados JSON e integração entre diferentes componentes de uma aplicação.
 
+## Autor
 
+Desenvolvido por [EdeNet00](https://github.com/EdeNet00).
 
+Projeto desenvolvido para fins educacionais.
