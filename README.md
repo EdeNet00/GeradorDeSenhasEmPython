@@ -262,11 +262,3 @@ A implementação utiliza o módulo `random`, que não é recomendado para a ger
 ## Objetivo acadêmico
 
 O objetivo do projeto é praticar a programação em Python, o desenvolvimento de interfaces web, a criação de APIs com Flask, o tratamento de requisições HTTP e a integração entre JavaScript e um backend.
-
----
-
-## Autor
-
-Desenvolvido por [EdeNet00](https://github.com/EdeNet00).
-
-Projeto desenvolvido para fins educacionais.
